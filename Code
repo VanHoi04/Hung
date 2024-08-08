@@ -1,0 +1,57 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Read the CSV file
+df = pd.read_csv('supermarket_sales.csv')
+
+# Explore the data
+print("Shape of the dataset:", df.shape)
+
+# Visualize the data
+# Histogram
+plt.figure(figsize=(8, 6))
+df['Unit price'].hist(bins=20)
+plt.title('Histogram of Unit Price')
+plt.xlabel('Unit Price')
+plt.ylabel('Frequency')
+plt.show()
+
+# Scatter plot
+plt.figure(figsize=(8, 6))
+plt.scatter(df['Quantity'], df['Total'])
+plt.title('Scatter Plot of Quantity vs Total')
+plt.xlabel('Quantity')
+plt.ylabel('Total')
+plt.show()
+
+# Box plot
+plt.figure(figsize=(10, 6))
+df.boxplot(['Unit price', 'Quantity', 'Tax 5%', 'Total'])
+plt.title('Box Plots of Key Columns')
+plt.xlabel('Column')
+plt.ylabel('Value')
+plt.show()
+
+# Line plot
+plt.figure(figsize=(8, 6))
+df.plot(x='Date', y=['Total', 'Tax 5%'], kind='line')
+plt.title('Line Plot of Total and Tax over Time')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.show()
+
+# Bar plot
+plt.figure(figsize=(8, 6))
+df.groupby('Payment').size().plot(kind='bar')
+plt.title('Bar Plot of Payment Methods')
+plt.xlabel('Payment Method')
+plt.ylabel('Count')
+plt.show()
+
+# Pie chart
+plt.figure(figsize=(8, 6))
+df['Payment'].value_counts().plot(kind='pie', autopct='%1.1f%%')
+plt.title('Pie Chart of Payment Methods')
+plt.axis('equal')
+plt.show()
